@@ -1,115 +1,359 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Galaxy Portfolio - Left Style</title>
-    <link rel="icon" type="png" href="cover.png">
-    <link rel="stylesheet" href="3d.css" class="" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <!-- For icons -->
-    <!-- <script src="https://kit.fontawesome.com/a2e0a6b8a7.js" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>3D Tech Loading</title>
     <style>
-      /* === BACKGROUND GALAXY === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
       body {
-        background: radial-gradient(
-          circle at 50% 20%,
-          #030318,
-          #020014,
-          #000010
-        );
-        overflow-x: hidden;
-        color: #fff;
+        width: 100%;
+        height: 100%;
+        background: #030012;
+        overflow: hidden;
+        font-family: sans-serif;
       }
 
-      /* Glow effect */
-      .glow-text {
-        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+      .tech-background {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        perspective: 1000px;
       }
 
-      /* Nebula */
-      .nebula {
+      /* Grid Background */
+      .grid-container {
         position: absolute;
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(
-          circle,
-          rgba(0, 255, 255, 0.1) 0%,
-          transparent 70%
-        );
-        filter: blur(120px);
-        top: 60%;
-        left: 40%;
-        transform: translate(-50%, -50%);
-        z-index: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
-      html {
-        scroll-behavior: smooth;
+      .grid-layer {
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.05) 0 1px,
+            transparent 1px 50px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0 1px,
+            transparent 1px 50px
+          );
+        animation: rotateGrid 20s linear infinite;
       }
 
-      /* Hover effect teks */
-      .title-glow {
-        text-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff;
+      @keyframes rotateGrid {
+        from {
+          transform: rotateX(0deg) rotateY(0deg);
+        }
+
+        to {
+          transform: rotateX(360deg) rotateY(360deg);
+        }
       }
 
-      .menu-item::before {
-        content: "";
+      /* Cubes */
+      .cube-container {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .cube {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        transform-style: preserve-3d;
+      }
+
+      .cube-face {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: rgba(90, 243, 255, 0.6);
+        border: 1px solid #2cdde3;
+      }
+
+      .cube .front {
+        transform: rotateY(0deg) translateZ(25px);
+      }
+
+      .cube .back {
+        transform: rotateY(180deg) translateZ(25px);
+      }
+
+      .cube .right {
+        transform: rotateY(90deg) translateZ(25px);
+      }
+
+      .cube .left {
+        transform: rotateY(-90deg) translateZ(25px);
+      }
+
+      .cube .top {
+        transform: rotateX(90deg) translateZ(25px);
+      }
+
+      .cube .bottom {
+        transform: rotateX(-90deg) translateZ(25px);
+      }
+
+      /* Rings */
+      .holo-ring {
+        position: absolute;
+        border: 2px solid #2cdde3;
+        border-radius: 50%;
+        animation: spin 8s linear infinite;
+        opacity: 0.6;
+      }
+
+      .ring1 {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        margin: -100px 0 0 -100px;
+      }
+
+      .ring2 {
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        margin: -150px 0 0 -150px;
+        animation-duration: 12s;
+      }
+
+      .ring3 {
+        width: 400px;
+        height: 400px;
+        top: 50%;
+        left: 50%;
+        margin: -200px 0 0 -200px;
+        animation-duration: 16s;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* DNA Helix */
+      .dna-helix {
+        position: absolute;
+        width: 20px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+      }
+
+      .dna-strand {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .dna-node {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #5af3ff;
+        border-radius: 50%;
+        animation: helixMove 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes helixMove {
+        0% {
+          transform: translateX(0) rotate(0deg);
+        }
+
+        50% {
+          transform: translateX(15px) rotate(180deg);
+        }
+
+        100% {
+          transform: translateX(0) rotate(360deg);
+        }
+      }
+
+      /* Circuit Board */
+      .circuit-board {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .circuit-line {
+        position: absolute;
+        background: #2cdde3;
+      }
+
+      .circuit-line.horizontal {
         height: 2px;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        transition: width 0.3s ease;
+        width: 80px;
+        animation: blink 1.5s infinite;
       }
 
-      .menu-item:hover::before {
+      .circuit-line.vertical {
+        width: 2px;
+        height: 80px;
+        animation: blink 1.5s infinite alternate;
+      }
+
+      .circuit-node {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #5af3ff;
+        animation: blink 2s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Robot Core */
+      .advanced-robot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .robot-core {
+        width: 30px;
+        height: 30px;
+        background: #2cdde3;
+        border-radius: 50%;
+        box-shadow: 0 0 15px #5af3ff;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.4);
+        }
+      }
+
+      .orbit-ring {
+        position: absolute;
+        border: 1px solid #2cdde3;
+        border-radius: 50%;
+        animation: rotateOrbit 5s linear infinite;
+      }
+
+      .orbit-ring .orbit-dot {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #5af3ff;
+        border-radius: 50%;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .ring1 {
+        width: 60px;
+        height: 60px;
+        top: -15px;
+        left: -15px;
+      }
+
+      .ring2 {
+        width: 100px;
+        height: 100px;
+        top: -35px;
+        left: -35px;
+        animation-duration: 8s;
+      }
+
+      @keyframes rotateOrbit {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Text rotator */
+      #dsc {
+        position: relative;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        height: 100%;
         width: 100%;
       }
 
-      /* Custom border-radius for all sections */
-      section {
-        border-radius: 25px;
-        /* Larger radius for sections */
-        margin: 10px;
-        transition: transform 0.3s ease;
-        /* Add hover effect */
+      #text-rotator {
+        margin-top: 20px;
+        font-size: 2rem;
+        border-right: 4px solid #38bdf8;
+        padding-right: 5px;
+        display: inline-block;
+        animation: cursor-blink 1s infinite;
       }
 
-      section:hover {
-        transform: scale(1.02);
-        /* Slight scale on hover */
-      }
+      @keyframes cursor-blink {
+        0%,
+        50%,
+        100% {
+          border-color: transparent;
+        }
 
-      /* Custom font */
-      body {
-        font-family: "Poppins", sans-serif;
-        /* Modern font */
-      }
-
-      /* navbar */
-      .navbar {
-        transition: all 0.4s ease-in-out;
-        /* efek halus untuk radius & lebar */
+        25%,
+        75% {
+          border-color: #38bdf8;
+        }
       }
     </style>
   </head>
 
-  <body class="relative min-h-screen">
+  <body>
     <div class="tech-background">
+      <!-- Grid -->
       <div class="grid-container">
         <div class="grid-layer"></div>
       </div>
 
+      <!-- Cubes -->
       <div class="cube-container">
         <div class="cube cube1">
           <div class="cube-face front"></div>
@@ -145,777 +389,147 @@
         </div>
       </div>
 
+      <!-- Rings -->
       <div class="holo-ring ring1"></div>
       <div class="holo-ring ring2"></div>
       <div class="holo-ring ring3"></div>
 
+      <!-- DNA Helix -->
+      <div class="dna-helix">
+        <div class="dna-strand">
+          <div class="dna-node" style="top: 10%"></div>
+          <div class="dna-node" style="top: 30%"></div>
+          <div class="dna-node" style="top: 50%"></div>
+          <div class="dna-node" style="top: 70%"></div>
+          <div class="dna-node" style="top: 90%"></div>
+        </div>
+      </div>
+
+      <!-- Circuit Board -->
+      <div class="circuit-board">
+        <div class="circuit-line horizontal" style="top: 20%; left: 10%"></div>
+        <div class="circuit-line vertical" style="top: 15%; left: 30%"></div>
+        <div class="circuit-line horizontal" style="top: 60%; right: 15%"></div>
+        <div
+          class="circuit-line vertical"
+          style="bottom: 20%; right: 25%"
+        ></div>
+
+        <div class="circuit-node" style="top: 20%; left: 10%"></div>
+        <div class="circuit-node" style="top: 15%; left: 30%"></div>
+        <div class="circuit-node" style="top: 60%; right: 15%"></div>
+        <div class="circuit-node" style="bottom: 20%; right: 25%"></div>
+      </div>
+
+      <!-- Robot Core -->
       <div class="advanced-robot">
         <div class="robot-core"></div>
+        <div class="orbit-ring ring1">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="orbit-ring ring2">
+          <div class="orbit-dot"></div>
+        </div>
+      </div>
+
+      <!-- Text & Rotator -->
+      <div id="dsc" class="flex flex-col justify-center items-center">
+        <h2 class="text-white text-9xl font-bold mb-4">
+          My 
+          <span
+            class="hover:text-blue-400 hover:scale-110 transition duration-300 ease-in-out inline-block"
+          >
+           Portofolio
+          </span>
+        </h2>
+        <h2 id="text-rotator" class="text-blue-300 font-bold"></h2>
       </div>
     </div>
 
-    <div class="cursor-trail"></div>
-
-   <!-- 🌐 Responsive Navbar -->
-<!-- 🌐 Responsive Navbar -->
-<nav
-  id="navbar"
-  class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] bg-[#0b1120]/70 backdrop-blur-md border border-cyan-400/20 rounded-3xl py-5 px-6 md:px-8 flex justify-between items-center shadow-[0_0_25px_rgba(56,189,248,0.25)] z-50 transition-all duration-500"
->
-  <!-- 🧩 Logo -->
-  <h1 class="text-2xl md:text-3xl font-bold tracking-wide text-white">
-    Portofolio
-  </h1>
-
-  <!-- 🖥️ Menu Desktop -->
-  <ul class="hidden md:flex space-x-8 text-lg font-medium text-white">
-    <li><a href="#home" class="hover:text-blue-400 transition">Home</a></li>
-    <li><a href="#about" class="hover:text-blue-400 transition">About</a></li>
-    <li><a href="#projek" class="hover:text-blue-400 transition">Projek</a></li>
-    <li><a href="#skill" class="hover:text-blue-400 transition">Skill</a></li>
-    <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
-  </ul>
-
-  <!-- 📱 Tombol Hamburger -->
-  <button
-    id="menu-btn"
-    class="md:hidden text-white text-3xl focus:outline-none hover:text-cyan-400 transition"
-  >
-    <i class="fas fa-bars"></i>
-  </button>
-</nav>
-
-<!-- 🌫️ Overlay Background -->
-<div
-  id="overlay"
-  class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 transition-opacity duration-500"
-></div>
-
-<!-- 📋 Menu Mobile (Slide dari kanan) -->
-<div
-  id="mobile-menu"
-  class="fixed top-0 right-0 h-full w-64 bg-[#0b1120] border-l border-cyan-400/20 shadow-2xl transform translate-x-full transition-transform duration-500 flex flex-col items-start p-6 space-y-6 z-50"
->
-  <!-- Tombol Close -->
-  <button
-    id="close-btn"
-    class="text-white text-3xl self-end hover:text-cyan-400 transition"
-  >
-    <i class="fas fa-times"></i>
-  </button>
-
-  <!-- Isi Menu -->
-  <ul class="flex flex-col space-y-6 text-lg font-medium text-white mt-6 w-full">
-    <li><a href="#home" class="hover:text-blue-400 transition block">Home</a></li>
-    <li><a href="#about" class="hover:text-blue-400 transition block">About</a></li>
-    <li><a href="#projek" class="hover:text-blue-400 transition block">Projek</a></li>
-    <li><a href="#skill" class="hover:text-blue-400 transition block">Skill</a></li>
-    <li><a href="#contact" class="hover:text-blue-400 transition block">Contact</a></li>
-  </ul>
-</div>
-
-<!-- ⚙️ Script -->
-<script>
-  const navbar = document.getElementById("navbar");
-  const menuBtn = document.getElementById("menu-btn");
-  const closeBtn = document.getElementById("close-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const overlay = document.getElementById("overlay");
-
-  // 🎢 Navbar mengecil saat scroll
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 60) {
-      navbar.classList.add("w-[70%]", "py-3", "rounded-xl", "bg-gray-800/90", "shadow-md");
-      navbar.classList.remove("w-[90%]", "py-5", "rounded-3xl", "bg-[#0b1120]/70");
-    } else {
-      navbar.classList.add("w-[90%]", "py-5", "rounded-3xl", "bg-[#0b1120]/70");
-      navbar.classList.remove("w-[70%]", "py-3", "rounded-xl", "bg-gray-800/90");
-    }
-  });
-
-  // 📱 Buka Menu Mobile
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.remove("translate-x-full");
-    overlay.classList.remove("hidden");
-    overlay.classList.add("opacity-100");
-  });
-
-  // ❌ Tutup Menu
-  function closeMenu() {
-    mobileMenu.classList.add("translate-x-full");
-    overlay.classList.add("hidden");
-    overlay.classList.remove("opacity-100");
-  }
-
-  closeBtn.addEventListener("click", closeMenu);
-  overlay.addEventListener("click", closeMenu);
-
-  // Tutup saat klik link
-  document.querySelectorAll("#mobile-menu a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-</script>
-
-
     <script>
-      const profileBtn = document.getElementById("profileBtn");
-      const profileDropdown = document.getElementById("profileDropdown");
+      // Typewriter Text Rotator
+      const texts = [
+        "❖UI/UX Designer❖",
+        "❖Front End Developer❖",
+        "❖Poster Digital Designer❖",
+      ];
+      let current = 0;
+      let index = 0;
+      let isDeleting = false;
+      const speed = 150;
+      const pause = 1000;
+      const rotator = document.getElementById("text-rotator");
 
-      profileBtn.addEventListener("click", () => {
-        profileDropdown.classList.toggle("hidden");
+      function type() {
+        const fullText = texts[current];
+        rotator.textContent = isDeleting
+          ? fullText.substring(0, index--)
+          : fullText.substring(0, index++);
+        if (!isDeleting && index === fullText.length + 1) {
+          setTimeout(() => (isDeleting = true), pause);
+        } else if (isDeleting && index === -1) {
+          isDeleting = false;
+          current = (current + 1) % texts.length;
+        }
+        setTimeout(type, isDeleting ? speed / 2 : speed);
+      }
+      type();
+
+      // Loading Bar under text-rotator
+      const rotatorContainer = document.getElementById("text-rotator");
+
+      const progressWrapper = document.createElement("div");
+      progressWrapper.style.marginTop = "20px";
+      progressWrapper.style.width = "100%";
+      progressWrapper.style.maxWidth = "400px";
+      progressWrapper.style.height = "20px";
+      progressWrapper.style.background = "rgba(255,255,255,0.2)";
+      progressWrapper.style.borderRadius = "10px";
+      rotatorContainer.parentElement.appendChild(progressWrapper);
+
+      const bar = document.createElement("div");
+      bar.style.width = "0%";
+      bar.style.height = "100%";
+      bar.style.background = "#38bdf8";
+      bar.style.borderRadius = "10px";
+      progressWrapper.appendChild(bar);
+
+      const statusText = document.createElement("div");
+      statusText.style.color = "#38bdf8";
+      statusText.style.fontWeight = "bold";
+      statusText.style.marginTop = "5px";
+      rotatorContainer.parentElement.appendChild(statusText);
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 3 + 1;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          statusText.textContent = "Selesai ✔";
+          document.body.style.transition = "opacity 1.2s";
+          document.body.style.opacity = "0";
+          setTimeout(
+            () => (window.location.href = "index.html"),
+            3500
+          );
+        }
+        // /webkarf_new/admin/home.php
+        bar.style.width = progress + "%";
+        statusText.textContent = Math.round(progress) + "%";
+      }, 1000);
+
+      // Animate cubes float
+      const cubes = document.querySelectorAll(".cube");
+      cubes.forEach((cube) => {
+        const delay = Math.random() * 2;
+        const duration = 4 + Math.random() * 4;
+        cube.style.animation = `floatCube ${duration}s ease-in-out ${delay}s infinite`;
       });
-
-      window.addEventListener("click", (e) => {
-        if (
-          !profileBtn.contains(e.target) &&
-          !profileDropdown.contains(e.target)
-        ) {
-          profileDropdown.classList.add("hidden");
-        }
+      const dnaNodes = document.querySelectorAll(".dna-node");
+      dnaNodes.forEach((node, i) => {
+        node.style.animationDelay = `${i * 0.3}s`;
       });
-    </script>
-
-    <!-- Hero Section -->
-    <!-- Hero Section 3D -->
-    <section
-      id="home"
-      class="relative min-h-screen flex flex-col justify-center items-center overflow-hidden text-white px-6 md:px-20"
-    >
-      <!-- Hero Content -->
-      <div class="relative z-10 text-center">
-        <span
-          class="bg-blue-900/30 text-blue-300 px-4 py-2 rounded-full text-sm tracking-widest border border-blue-500/30"
-        >
-          <span class="brand-text" id="text" data-aos-duration="900"></span>
-          <script>
-            const text = "✨ My Portofolio Website ✨";
-            let indexhtml = 0;
-
-            function typeEffect() {
-              if (indexhtml < text.length) {
-                document.getElementById("text").innerHTML +=
-                  text[indexhtml] + "&nbsp;";
-                indexhtml++;
-                setTimeout(typeEffect, 220);
-              }
-            }
-            typeEffect();
-          </script>
-        </span>
-
-        <h1
-          class="mt-10 text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 leading-tight"
-        >
-          Welcome to <span class="whitespace-nowrap">My Portofolio</span>
-        </h1>
-
-        <h2
-          id="text-rotator"
-          class="mt-4 text-3xl md:text-4xl font-bold text-blue-400 border-r-4 border-blue-400 pr-2 animate-cursor"
-        ></h2>
-
-        <p class="mt-6 max-w-3xl mx-auto text-gray-300 text-lg md:text-xl">
-          I craft
-          <span class="text-cyan-400 font-semibold">responsive</span> and
-          visually engaging websites with
-          <span class="text-orange-400 font-semibold">HTML</span>,
-          <span class="text-cyan-400 font-semibold">Tailwind CSS</span>,
-          <span class="text-yellow-400 font-semibold">JavaScript</span>, and
-          <span class="text-purple-400 font-semibold">Bootstrap</span>.
-        </p>
-
-        <div class="flex flex-wrap justify-center gap-3 mt-10">
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-orange-500 transition-all duration-300 cursor-pointer"
-            >HTML</span
-          >
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-cyan-300 transition-all duration-300 cursor-pointer"
-            >Tailwind CSS</span
-          >
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-yellow-500 transition-all duration-300 cursor-pointer"
-            >JavaScript</span
-          >
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-purple-500 transition-all duration-300 cursor-pointer"
-            >Bootstrap</span
-          >
-        </div>
-      </div>
-
-      <!-- Typewriter Script -->
-      <script>
-        const texts = [
-          "UI/UX Designer",
-          "Front End Developer",
-          "Poster Digital Designer",
-        ];
-        let current = 0;
-        let index = 0;
-        let isDeleting = false;
-        const speed = 150;
-        const pause = 1000;
-
-        const rotator = document.getElementById("text-rotator");
-
-        function type() {
-          const fullText = texts[current];
-          rotator.textContent = isDeleting
-            ? fullText.substring(0, index--)
-            : fullText.substring(0, index++);
-
-          if (!isDeleting && index === fullText.length + 1) {
-            setTimeout(() => (isDeleting = true), pause);
-          } else if (isDeleting && index === -1) {
-            isDeleting = false;
-            current = (current + 1) % texts.length;
-          }
-          setTimeout(type, isDeleting ? speed / 2 : speed);
-        }
-
-        type();
-      </script>
-
-      <style>
-        @keyframes cursor-blink {
-          0%,
-          50%,
-          100% {
-            border-color: transparent;
-          }
-
-          25%,
-          75% {
-            border-color: #38bdf8;
-          }
-        }
-
-        .animate-cursor {
-          border-right-width: 4px;
-          animation: cursor-blink 1s infinite;
-        }
-      </style>
-    </section>
-
-    <!-- ===================== RUNNING TEXT ===================== -->
-    <section class="relative overflow-hidden py-8">
-      <div class="absolute inset-0 bg-transparent pointer-events-none"></div>
-
-      <div
-        id="running-text"
-        class="text-3xl flex space-x-12 w-max text-xl font-semibold text-blue-700 whitespace-nowrap"
-      >
-        <span class="text-5xl font-extrabold text-cyan-400">
-          About
-          <span
-            class="text-white font-extrabold title-glow leading-tight text-5xl"
-            >Me</span
-          >
-        </span>
-        <span class="text-5xl font-extrabold text-cyan-400">
-          About
-          <span
-            class="text-white font-extrabold title-glow leading-tight text-5xl"
-            >Me</span
-          >
-        </span>
-        <span class="text-5xl font-extrabold text-cyan-400">
-          About
-          <span
-            class="text-white font-extrabold title-glow leading-tight text-5xl"
-            >Me</span
-          >
-        </span>
-        <span class="text-5xl font-extrabold text-cyan-400">
-          About
-          <span
-            class="text-white font-extrabold title-glow leading-tight text-5xl"
-            >Me</span
-          >
-        </span>
-      </div>
-    </section>
-
-    <script>
-      (function () {
-        const container = document.getElementById("running-text");
-        const content = container.innerHTML;
-        container.innerHTML += content; // duplicate content for infinite scroll
-
-        let posX = 0; // nama variabel berbeda agar tidak konflik
-        const scrollSpeed = 0.7;
-        let isPaused = false;
-
-        function scrollText() {
-          if (!isPaused) {
-            posX -= scrollSpeed;
-            if (Math.abs(posX) >= container.scrollWidth / 2) posX = 0;
-            container.style.transform = `translateX(${posX}px)`;
-          }
-          requestAnimationFrame(scrollText);
-        }
-
-        scrollText();
-
-        container.addEventListener("mouseenter", () => (isPaused = true));
-        container.addEventListener("mouseleave", () => (isPaused = false));
-      })();
-    </script>
-
-    <style>
-      #running-text {
-        display: flex;
-        white-space: nowrap;
-        will-change: transform;
-        transition: transform 0.1s linear;
-        animation-timing-function: linear;
-        margin-bottom: 9%;
-        font-size: 4rem;
-      }
-
-      #running-text span {
-        font-size: 6rem;
-      }
-
-      section {
-        position: relative;
-      }
-    </style>
-
-    <!-- ============= About ========================= -->
-    <div id="about" class="min-h-screen flex items-center justify-center p-6">
-      <div
-        class="bg-[#0a0a1f] flex flex-col md:flex-row items-center md:items-start max-w-6xl w-full gap-10"
-      >
-        <!-- Foto Profil -->
-        <div class="relative">
-          <img
-            src="4914967c3b8f7ff0ff23aa777e3d26b7-removebg-preview.png"
-            alt="Profile"
-            class="rounded-2xl w-72 md:w-96 shadow-lg relative z-10"
-          />
-          <!-- Ornamen Lingkaran -->
-          <div
-            class="absolute -bottom-10 -left-10 w-48 h-48 border-4 border-t-[#4f46e5] border-b-transparent rounded-full animate-spin-slow"
-          ></div>
-        </div>
-
-        <!-- Konten -->
-        <div class="flex-1 space-y-6">
-          <p class="text-sm text-gray-400 uppercase tracking-widest">
-            About Us
-          </p>
-          <h1 class="text-3xl md:text-4xl font-bold">
-            I am available for
-            <span class="text-blue-500">
-              Front End Developer, UI/UX Design, Poster Digital
-            </span>
-            project
-          </h1>
-          <p class="text-gray-300 text-sm md:text-base">
-            Hai, saya Lutfi Andika, seorang Front-End Developer dari Bekasi.
-            Saya senang menciptakan website yang modern, responsif, dan
-            interaktif, menggabungkan desain yang menarik dengan pengalaman
-            pengguna yang lancar. Dengan latar belakang pendidikan di SMK
-            Telekomunikasi Telesandi Bekasi, saya terus mengasah kemampuan dalam
-            HTML, CSS, JavaScript, dan Tailwind CSS untuk menghadirkan proyek
-            web berkualitas tinggi.
-          </p>
-
-          <!-- Tombol -->
-          <button
-            class="mt-4 bg-blue-500 hover:bg-blue-600 transition-colors text-white px-6 py-3 rounded-lg font-medium"
-          >
-            Get in Touch →
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      // Animasi rotasi lambat untuk lingkaran
-      const style = document.createElement("style");
-      style.innerHTML = `
-      @keyframes spin-slow {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      .animate-spin-slow { animation: spin-slow 20s linear infinite; }
-    `;
-      document.head.appendChild(style);
-    </script>
-
-    <!-- ===================== Projek ===================== -->
-    <section id="projek" class="py-16 flex flex-col items-center gap-10">
-      <h2 class="text-4xl font-bold text-center mb-12 text-blue-300">
-        <span class="tracking-wide">❖</span>Creative, Interactive, and
-        Well-Designed Projects.<span>❖</span>
-      </h2>
-
-      <!-- 🎓 Banner -->
-      <section
-        class="mx-auto mt-10 w-[90%] rounded-2xl bg-gradient-to-r from-blue-700 to-blue-500 text-white p-8 flex flex-col md:flex-row justify-between items-center shadow-xl"
-      >
-        <div class="max-w-xl">
-          <h2 class="text-2xl font-bold mb-2">
-            Jelajahi lebih banyak
-            <span class="text-yellow-300">Proyek Saya!</span>
-          </h2>
-          <p class="text-white/90 text-sm md:text-base">
-            Temukan berbagai proyek web interaktif dan eksperimen coding yang
-            saya buat untuk mengasah kemampuan dan menampilkan kreativitas saya
-            sebagai Front-End Developer.
-          </p>
-        </div>
-
-        <!-- Tombol buka pop-up / link ke portfolio -->
-        <a
-          href="#portfolio"
-          id="lihat-proyek-btn"
-          class="mt-5 md:mt-0 bg-white text-blue-600 font-medium px-6 py-2 rounded-full flex items-center gap-2 hover:bg-blue-100 hover:scale-105 transition-all duration-300"
-        >
-          Lihat Proyek
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-4 h-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </a>
-      </section>
-      <!-- 🎛️ Filter Button -->
-      <div class="flex flex-wrap justify-center gap-4 mb-6 w-[90%] lg:w-[82%]">
-        <button
-          onclick="filterVideos('all', event)"
-          class="filter-btn bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition"
-        >
-          All Projek
-        </button>
-        <button
-          onclick="filterVideos('Website', event)"
-          class="filter-btn bg-gray-200 text-blue-700 px-6 py-2 rounded-full font-semibold hover:bg-blue-100 transition"
-        >
-          Website
-        </button>
-        <button
-          onclick="filterVideos('UI/UX', event)"
-          class="filter-btn bg-gray-200 text-blue-700 px-6 py-2 rounded-full font-semibold hover:bg-blue-100 transition"
-        >
-          UI/UX Design
-        </button>
-        <button
-          onclick="filterVideos('Poster', event)"
-          class="filter-btn bg-gray-200 text-blue-700 px-6 py-2 rounded-full font-semibold hover:bg-blue-100 transition"
-        >
-          Poster Digital
-        </button>
-      </div>
-
-      <!-- 🎬 Video Grid -->
-      <div
-        id="video-container"
-        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 w-full max-w-[1900px] px-10"
-      >
-        <!-- Website -->
-        <div
-          class="video-card cursor-pointer bg-white shadow-2xl rounded-3xl overflow-hidden hover:scale-[1.03] transition-all duration-300"
-          data-category="Website"
-        >
-          <img
-            src="https://i.pinimg.com/736x/bc/ce/f3/bccef3acf376bba141d56eb0d8fcfc09.jpg"
-            class="w-full h-[350px] object-cover"
-          />
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-blue-700">Webkarf</h3>
-            <p class="text-gray-600 mt-3 text-lg">
-              Webkarf adalah website yang menyediakan layanan jasa digital.
-            </p>
-            <a href="https://webkraf.netlify.app/" target="_blank"  class="text-blue-300">Lihat Selebihnya</a>
-          </div>
-        </div>
-
-        <!-- Website -->
-        <div
-          class="video-card cursor-pointer bg-white shadow-2xl rounded-3xl overflow-hidden hover:scale-[1.03] transition-all duration-300"
-          data-category="Website"
-        >
-          <img
-            src="https://i.pinimg.com/736x/3a/af/b4/3aafb4b1894bd114d3f6e3145b4c2e9e.jpg"
-            class="w-full h-[350px] object-cover"
-          />
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-blue-700">
-              Website Undangan Pernikahan Zulfian Irya
-            </h3>
-            <p class="text-gray-600 mt-3 text-lg">
-              Website interaktif untuk undangan pernikahan modern.
-            </p>
-            <a href="https://magical-torte-1fd6d7.netlify.app/" target="_blank"  class="text-blue-300">Lihat Selebihnya</a>
-          </div>
-        </div>
-
-        <!-- Website -->
-        <div
-          class="video-card cursor-pointer bg-white shadow-2xl rounded-3xl overflow-hidden hover:scale-[1.03] transition-all duration-300"
-          data-category="Website"
-        >
-          <img
-            src="https://i.pinimg.com/1200x/50/9c/d5/509cd5d81a4d708f07b7b81e0560c121.jpg"
-            class="w-full h-[350px] object-cover"
-          />
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-blue-700">
-              Website Jualan Dian Tas Galery
-            </h3>
-            <p class="text-gray-600 mt-3 text-lg">
-              Website e-commerce yang menjual berbagai jenis tas fashion.
-            </p>
-            <a href="https://lutfi-dika.github.io/website-jualan-Dian_tas-galery/" target="_blank"  class="text-blue-300">Lihat Selebihnya</a>
-          </div>
-        </div>
-
-        <!-- UI/UX -->
-        <div
-          class="video-card cursor-pointer bg-white shadow-2xl rounded-3xl overflow-hidden hover:scale-[1.03] transition-all duration-300"
-          data-category="UI/UX"
-        >
-          <img
-            src="https://i.pinimg.com/1200x/11/60/41/1160419b7a01b8a710fe6cf350ec0dad.jpg"
-            class="w-full h-[350px] object-cover"
-          />
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-blue-700">UI/UX Cakralogy</h3>
-            <p class="text-gray-600 mt-3 text-lg">
-              Desain UI/UX untuk platform edukasi berbasis teknologi.
-            </p>
-            <a href="https://www.figma.com/design/MOIrbN4t1p6eGCLPokGXg7/HIDUPNGOEDING?t=Ec9wrLtJo94u8tQ6-0" target="_blank"  class="text-blue-300">Lihat Selebihnya</a>
-          </div>
-        </div>
-
-      <!-- 🎯 JavaScript Filter Function -->
-      <script>
-        function filterVideos(category, event) {
-          const cards = document.querySelectorAll(".video-card");
-          const buttons = document.querySelectorAll(".filter-btn");
-
-          // ubah warna tombol aktif
-          buttons.forEach((btn) => {
-            btn.classList.remove("bg-blue-600", "text-white");
-            btn.classList.add("bg-gray-200", "text-blue-700");
-          });
-
-          event.target.classList.add("bg-blue-600", "text-white");
-          event.target.classList.remove("bg-gray-200", "text-blue-700");
-
-          // filter kategori
-          cards.forEach((card) => {
-            if (category === "all" || card.dataset.category === category) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        }
-      </script>
-      <style>
-        #projek{
-          margin-bottom: 9%;
-        }
-      </style>
-    </section>
-
-
-    <section id="skill" class="w-[90%] max-w-4xl mx-auto mt-16">
-<h2 class="text-4xl font-bold text-center mb-12 text-blue-300">
-        <span class="tracking-wide">❖</span>Proficient, Creative, and Result-Oriented Abilities.<span>❖</span>
-      </h2>
-
-  <div class="space-y-6">
-
-    <!-- Skill 1 -->
-    <div>
-      <div class="flex justify-between mb-1">
-        <span class="font-semibold text-lg text-orange-500">HTML</span>
-        <span class="font-semibold text-gray-700">95%</span>
-      </div>
-      <div class="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
-        <div class="bg-blue-600 h-6 rounded-full skill-bar" style="width: 0%"></div>
-      </div>
-    </div>
-
-    <!-- Skill 2 -->
-    <div>
-      <div class="flex justify-between mb-1">
-        <span class="font-semibold text-lg text-blue-500">CSS / Tailwind</span>
-        <span class="font-semibold text-gray-700">90%</span>
-      </div>
-      <div class="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
-        <div class="bg-purple-600 h-6 rounded-full skill-bar" style="width: 0%"></div>
-      </div>
-    </div>
-
-    <!-- Skill 3 -->
-    <div>
-      <div class="flex justify-between mb-1">
-        <span class="font-semibold text-lg text-yellow-500">JavaScript</span>
-        <span class="font-semibold text-gray-700">85%</span>
-      </div>
-      <div class="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
-        <div class="bg-green-500 h-6 rounded-full skill-bar" style="width: 0%"></div>
-      </div>
-    </div>
-
-    <!-- Skill 4 -->
-    <div>
-      <div class="flex justify-between mb-1">
-        <span class="font-semibold text-lg text-red-500">UI/UX Design</span>
-        <span class="font-semibold text-gray-700">80%</span>
-      </div>
-      <div class="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
-        <div class="bg-yellow-500 h-6 rounded-full skill-bar" style="width: 0%"></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<script>
-  // Animasi skill bar saat halaman load
-  window.addEventListener('DOMContentLoaded', () => {
-    const bars = document.querySelectorAll('.skill-bar');
-    const widths = [95, 90, 85, 80]; // persentase tiap skill
-    bars.forEach((bar, i) => {
-      setTimeout(() => {
-        bar.style.width = widths[i] + '%';
-        bar.style.transition = 'width 1.5s ease-in-out';
-      }, i * 200);
-    });
-  });
-</script>
-
-<style>
-  #skill{
-    margin-bottom: 8%;
-  }
-</style>
-
- <!-- contact -->
-
-<section id="contact" class="w-[90%] max-w-3xl mx-auto mt-16 mb-16">
-  <h2 class="text-4xl font-bold text-center mb-12 text-blue-300">
-        <span class="tracking-wide">❖</span>Fast, Friendly, and Responsive Communication.”<span>❖</span>
-      </h2>
-
-  <form  action="https://formspree.io/f/xdkpdava"
-  method="POST" class="bg-white shadow-2xl rounded-2xl p-8 space-y-6">
-
-    <!-- Name -->
-    <div>
-      <label for="name" class="block mb-2 font-semibold text-gray-700">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your Name"
-        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" required>
-    </div>
-
-    <!-- Email -->
-    <div>
-      <label for="email" class="block mb-2 font-semibold text-gray-700">Email</label>
-      <input type="email" id="email" name="email" placeholder="Your Email"
-        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" required>
-    </div>
-
-    <!-- Subject -->
-    <div>
-      <label for="subject" class="block mb-2 font-semibold text-gray-700">Subject</label>
-      <input type="text" id="subject" name="subject" placeholder="Subject"
-        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
-    </div>
-
-    <!-- Message -->
-    <div>
-      <label for="message" class="block mb-2 font-semibold text-gray-700">Message</label>
-      <textarea id="message" name="message" rows="5" placeholder="Write your message..."
-        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" required></textarea>
-    </div>
-
-    <!-- Submit Button -->
-    <div class="text-center">
-      <button type="submit"
-        class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-blue-700 transition">
-        Send Message
-      </button>
-    </div>
-
-  </form>
-  <style>
-    #contact{
-      margin-bottom: 9%;
-    }
-  </style>
-</section>
-
-
-<!-- footer -->
- <footer class="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <!-- Brand -->
-                <div>
-                    <span class="font-bold text-2xl text-blue-500">
-                        Porofolio
-                    </span>
-                    <p class="text-sm mt-2 text-white">Mengembangkan solusi edukasi teknologi bagi generasi digital di Indonesia.”</p>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-white">
-                        <li><a href="#home" class="hover:text-gray-300 transition-colors">Home</a></li>
-                        <li><a href="#about" class="hover:text-gray-300 transition-colors">about</a></li>
-                        <li><a href="#projek" class="hover:text-gray-300 transition-colors">projek</a></li>
-                        <li><a href="#skill" class="hover:text-gray-300 transition-colors">skill</a></li>
-                        <li><a href="#contact" class="hover:text-gray-300 transition-colors">contact</a></li>
-
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Resources</h4>
-                    <ul class="space-y-2 text-sm text-white">
-                        <li><a href="#" class="hover:text-gray-300 transition-colors">Documentation</a></li>
-                        <li><a href="#" class="hover:text-gray-300 transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-gray-300 transition-colors">Support</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-slate-700 pt-8 text-center text-sm text-white">
-                <p id="footer-year">© 2025. All rights reserved. Crafted with passion for digital learning.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // Set current year dynamically
-        document.getElementById('footer-year').innerHTML = `© ${new Date().getFullYear()} InnoVerse. All rights reserved. | Made with passion for education`;
-
-        // Initialize Lucide icons
-        window.addEventListener('DOMContentLoaded', () => {
-            lucide.replace();
-        });
     </script>
   </body>
-  <script src="script.js"></script>
-  <script src="block.js"></script>
 </html>
