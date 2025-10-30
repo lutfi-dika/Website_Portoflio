@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="png" href="cover.png">
+    <link rel="icon" type="png" href="cover.png" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Portofolio</title>
     <style>
@@ -344,6 +344,389 @@
           border-color: #38bdf8;
         }
       }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: #030012;
+        overflow: hidden;
+        font-family: sans-serif;
+      }
+
+      .tech-background {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        perspective: 1000px;
+      }
+
+      .grid-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .grid-layer {
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.05) 0 1px,
+            transparent 1px 50px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0 1px,
+            transparent 1px 50px
+          );
+        animation: rotateGrid 20s linear infinite;
+      }
+
+      @keyframes rotateGrid {
+        from {
+          transform: rotateX(0deg) rotateY(0deg);
+        }
+        to {
+          transform: rotateX(360deg) rotateY(360deg);
+        }
+      }
+
+      .cube-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .cube {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        transform-style: preserve-3d;
+      }
+
+      .cube-face {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: rgba(90, 243, 255, 0.6);
+        border: 1px solid #2cdde3;
+      }
+
+      .cube .front {
+        transform: rotateY(0deg) translateZ(25px);
+      }
+
+      .cube .back {
+        transform: rotateY(180deg) translateZ(25px);
+      }
+
+      .cube .right {
+        transform: rotateY(90deg) translateZ(25px);
+      }
+
+      .cube .left {
+        transform: rotateY(-90deg) translateZ(25px);
+      }
+
+      .cube .top {
+        transform: rotateX(90deg) translateZ(25px);
+      }
+
+      .cube .bottom {
+        transform: rotateX(-90deg) translateZ(25px);
+      }
+
+      .holo-ring {
+        position: absolute;
+        border: 2px solid #2cdde3;
+        border-radius: 50%;
+        animation: spin 8s linear infinite;
+        opacity: 0.6;
+      }
+
+      .ring1 {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        margin: -100px 0 0 -100px;
+      }
+
+      .ring2 {
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        margin: -150px 0 0 -150px;
+        animation-duration: 12s;
+      }
+
+      .ring3 {
+        width: 400px;
+        height: 400px;
+        top: 50%;
+        left: 50%;
+        margin: -200px 0 0 -200px;
+        animation-duration: 16s;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .dna-helix {
+        position: absolute;
+        width: 20px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+      }
+
+      .dna-strand {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .dna-node {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #5af3ff;
+        border-radius: 50%;
+        animation: helixMove 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes helixMove {
+        0% {
+          transform: translateX(0) rotate(0deg);
+        }
+
+        50% {
+          transform: translateX(15px) rotate(180deg);
+        }
+
+        100% {
+          transform: translateX(0) rotate(360deg);
+        }
+      }
+
+      .circuit-board {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .circuit-line {
+        position: absolute;
+        background: #2cdde3;
+      }
+
+      .circuit-line.horizontal {
+        height: 2px;
+        width: 80px;
+        animation: blink 1.5s infinite;
+      }
+
+      .circuit-line.vertical {
+        width: 2px;
+        height: 80px;
+        animation: blink 1.5s infinite alternate;
+      }
+
+      .circuit-node {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #5af3ff;
+        animation: blink 2s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .advanced-robot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .robot-core {
+        width: 30px;
+        height: 30px;
+        background: #2cdde3;
+        border-radius: 50%;
+        box-shadow: 0 0 15px #5af3ff;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.4);
+        }
+      }
+
+      .orbit-ring {
+        position: absolute;
+        border: 1px solid #2cdde3;
+        border-radius: 50%;
+        animation: rotateOrbit 5s linear infinite;
+      }
+
+      .orbit-ring .orbit-dot {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #5af3ff;
+        border-radius: 50%;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .ring1 {
+        width: 60px;
+        height: 60px;
+        top: -15px;
+        left: -15px;
+      }
+
+      .ring2 {
+        width: 100px;
+        height: 100px;
+        top: -35px;
+        left: -35px;
+        animation-duration: 8s;
+      }
+
+      @keyframes rotateOrbit {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #dsc {
+        position: relative;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+      }
+
+      #text-rotator {
+        margin-top: 20px;
+        font-size: 2rem;
+        border-right: 4px solid #38bdf8;
+        padding-right: 5px;
+        display: inline-block;
+        animation: cursor-blink 1s infinite;
+      }
+
+      @keyframes cursor-blink {
+        0%,
+        50%,
+        100% {
+          border-color: transparent;
+        }
+        25%,
+        75% {
+          border-color: #38bdf8;
+        }
+      }
+
+      /* 📱 Responsiveness only (no layout change) */
+      @media (max-width: 1024px) {
+        h2.text-9xl {
+          font-size: 4rem;
+          text-align: center;
+        }
+        #text-rotator {
+          font-size: 1.3rem;
+        }
+        .ring1,
+        .ring2,
+        .ring3 {
+          transform: scale(0.8);
+        }
+      }
+
+      @media (max-width: 768px) {
+        h2.text-9xl {
+          font-size: 3rem;
+        }
+        #text-rotator {
+          font-size: 1rem;
+        }
+        .cube {
+          width: 35px;
+          height: 35px;
+        }
+        .cube-face {
+          width: 35px;
+          height: 35px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h2.text-9xl {
+          font-size: 2rem;
+        }
+        #text-rotator {
+          font-size: 0.9rem;
+        }
+        .ring1,
+        .ring2,
+        .ring3 {
+          transform: scale(0.6);
+        }
+        .cube {
+          width: 25px;
+          height: 25px;
+        }
+        .cube-face {
+          width: 25px;
+          height: 25px;
+        }
+      }
     </style>
   </head>
 
@@ -436,11 +819,11 @@
       <!-- Text & Rotator -->
       <div id="dsc" class="flex flex-col justify-center items-center">
         <h2 class="text-white text-9xl font-bold mb-4">
-          My 
+          My
           <span
             class="hover:text-blue-400 hover:scale-110 transition duration-300 ease-in-out inline-block"
           >
-           Portofolio
+            Portofolio
           </span>
         </h2>
         <h2 id="text-rotator" class="text-blue-300 font-bold"></h2>
@@ -510,10 +893,7 @@
           statusText.textContent = "Selesai ✔";
           document.body.style.transition = "opacity 1.2s";
           document.body.style.opacity = "0";
-          setTimeout(
-            () => (window.location.href = "index.html"),
-            3500
-          );
+          setTimeout(() => (window.location.href = "index.html"), 3500);
         }
         // /webkarf_new/admin/home.php
         bar.style.width = progress + "%";
