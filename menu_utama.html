@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portofolio</title>
-    <link rel="icon" type="png" href="cover.png">
+    <link rel="icon" type="png" href="Brand Logo.png" class="Logo">
     <link rel="stylesheet" href="3d.css" class="" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
@@ -15,6 +15,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+     <!-- Model Viewer -->
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
     <!-- For icons -->
     <!-- <script src="https://kit.fontawesome.com/a2e0a6b8a7.js" crossorigin="anonymous"></script> -->
     <style>
@@ -99,8 +104,48 @@
       /* navbar */
       .navbar {
         transition: all 0.4s ease-in-out;
+        margin-bottom: 7%;
         /* efek halus untuk radius & lebar */
       }
+
+     @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating 3D model */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Cursor blink for typewriter */
+    @keyframes cursor-blink {
+      0%,50%,100% { border-color: transparent; }
+      25%,75% { border-color: #38bdf8; }
+    }
+    .animate-cursor {
+      border-right-width: 4px;
+      animation: cursor-blink 1s infinite;
+    }
+
+    /* Skill badge glow */
+    .skill-glow {
+      box-shadow: 0 0 10px #38bdf8, 0 0 20px #0ea5e9;
+      transition: all 0.3s;
+    }
+    .skill-glow:hover {
+      box-shadow: 0 0 20px #f472b6, 0 0 30px #facc15;
+      transform: scale(1.05);
+    }
+
+    #home{
+      padding: 3.3rem;
+    }
     </style>
   </head>
 
@@ -156,64 +201,35 @@
 
     <div class="cursor-trail"></div>
 
-   <!-- 🌐 Responsive Navbar -->
-<!-- 🌐 Responsive Navbar -->
-<nav
-  id="navbar"
-  class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] bg-[#0b1120]/70 backdrop-blur-md border border-cyan-400/20 rounded-3xl py-5 px-6 md:px-8 flex justify-between items-center shadow-[0_0_25px_rgba(56,189,248,0.25)] z-50 transition-all duration-500"
->
-  <!-- 🧩 Logo -->
-  <h1 class="text-2xl md:text-3xl font-bold tracking-wide text-white">
-    Portofolio
-  </h1>
+   <!-- Navbar -->
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] bg-[#0b1120]/70 backdrop-blur-md border border-cyan-400/20 rounded-3xl py-4 px-6 md:px-8 flex justify-between items-center shadow-[0_0_25px_rgba(56,189,248,0.25)] z-50 transition-all duration-500">
+    <h1 class="text-2xl md:text-3xl font-bold tracking-wide text-white">Portofolio</h1>
+    <ul class="hidden md:flex space-x-8 text-lg font-medium text-white">
+      <li><a href="#home" class="hover:text-blue-400 transition">Home</a></li>
+      <li><a href="#about" class="hover:text-blue-400 transition">About</a></li>
+      <li><a href="#projek" class="hover:text-blue-400 transition">Projek</a></li>
+      <li><a href="#skill" class="hover:text-blue-400 transition">Skill</a></li>
+      <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
+    </ul>
+    <button id="menu-btn" class="md:hidden text-white text-3xl focus:outline-none hover:text-cyan-400 transition">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
 
-  <!-- 🖥️ Menu Desktop -->
-  <ul class="hidden md:flex space-x-8 text-lg font-medium text-white">
-    <li><a href="#home" class="hover:text-blue-400 transition">Home</a></li>
-    <li><a href="#about" class="hover:text-blue-400 transition">About</a></li>
-    <li><a href="#projek" class="hover:text-blue-400 transition">Projek</a></li>
-    <li><a href="#skill" class="hover:text-blue-400 transition">Skill</a></li>
-    <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
-  </ul>
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 transition-opacity duration-500"></div>
 
-  <!-- 📱 Tombol Hamburger -->
-  <button
-    id="menu-btn"
-    class="md:hidden text-white text-3xl focus:outline-none hover:text-cyan-400 transition"
-  >
-    <i class="fas fa-bars"></i>
-  </button>
-</nav>
-
-<!-- 🌫️ Overlay Background -->
-<div
-  id="overlay"
-  class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 transition-opacity duration-500"
-></div>
-
-<!-- 📋 Menu Mobile (Slide dari kanan) -->
-<div
-  id="mobile-menu"
-  class="fixed top-0 right-0 h-full w-64 bg-[#0b1120] border-l border-cyan-400/20 shadow-2xl transform translate-x-full transition-transform duration-500 flex flex-col items-start p-6 space-y-6 z-50"
->
-  <!-- Tombol Close -->
-  <button
-    id="close-btn"
-    class="text-white text-3xl self-end hover:text-cyan-400 transition"
-  >
-    <i class="fas fa-times"></i>
-  </button>
-
-  <!-- Isi Menu -->
-  <ul class="flex flex-col space-y-6 text-lg font-medium text-white mt-6 w-full">
-    <li><a href="#home" class="hover:text-blue-400 transition block">Home</a></li>
-    <li><a href="#about" class="hover:text-blue-400 transition block">About</a></li>
-    <li><a href="#projek" class="hover:text-blue-400 transition block">Projek</a></li>
-    <li><a href="#skill" class="hover:text-blue-400 transition block">Skill</a></li>
-    <li><a href="#contact" class="hover:text-blue-400 transition block">Contact</a></li>
-  </ul>
-</div>
-
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-[#0b1120] border-l border-cyan-400/20 shadow-2xl transform translate-x-full transition-transform duration-500 flex flex-col items-start p-6 space-y-6 z-50">
+    <button id="close-btn" class="text-white text-3xl self-end hover:text-cyan-400 transition"><i class="fas fa-times"></i></button>
+    <ul class="flex flex-col space-y-6 text-lg font-medium text-white mt-6 w-full">
+      <li><a href="#home" class="hover:text-blue-400 transition block">Home</a></li>
+      <li><a href="#about" class="hover:text-blue-400 transition block">About</a></li>
+      <li><a href="#projek" class="hover:text-blue-400 transition block">Projek</a></li>
+      <li><a href="#skill" class="hover:text-blue-400 transition block">Skill</a></li>
+      <li><a href="#contact" class="hover:text-blue-400 transition block">Contact</a></li>
+    </ul>
+  </div>
 <!-- ⚙️ Script -->
 <script>
   const navbar = document.getElementById("navbar");
@@ -274,129 +290,93 @@
         }
       });
     </script>
-
-    <!-- Hero Section -->
-    <!-- Hero Section 3D -->
-    <section
-      id="home"
-      class="relative min-h-screen flex flex-col justify-center items-center overflow-hidden text-white px-6 md:px-20"
-    >
-      <!-- Hero Content -->
-      <div class="relative z-10 text-center">
-        <span
-          class="bg-blue-900/30 text-blue-300 px-4 py-2 rounded-full text-sm tracking-widest border border-blue-500/30"
-        >
-          <span class="brand-text" id="text" data-aos-duration="900"></span>
-          <script>
-            const text = "✨ My Portofolio Website ✨";
-            let indexhtml = 0;
-
-            function typeEffect() {
-              if (indexhtml < text.length) {
-                document.getElementById("text").innerHTML +=
-                  text[indexhtml] + "&nbsp;";
-                indexhtml++;
-                setTimeout(typeEffect, 220);
-              }
-            }
-            typeEffect();
-          </script>
-        </span>
-
-        <h1
-          class="mt-10 text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 leading-tight"
-        >
-          Welcome to <span class="whitespace-nowrap">My Portofolio</span>
-        </h1>
-
-        <h2
-          id="text-rotator"
-          class="mt-4 text-3xl md:text-4xl font-bold text-blue-400 border-r-4 border-blue-400 pr-2 animate-cursor"
-        ></h2>
-
-        <p class="mt-6 max-w-3xl mx-auto text-gray-300 text-lg md:text-xl">
-          I craft
-          <span class="text-cyan-400 font-semibold">responsive</span> and
-          visually engaging websites with
-          <span class="text-orange-400 font-semibold">HTML</span>,
-          <span class="text-cyan-400 font-semibold">Tailwind CSS</span>,
-          <span class="text-yellow-400 font-semibold">JavaScript</span>, and
-          <span class="text-purple-400 font-semibold">Bootstrap</span>.
-        </p>
-
-        <div class="flex flex-wrap justify-center gap-3 mt-10">
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-orange-500 transition-all duration-300 cursor-pointer"
-            >HTML</span
-          >
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-cyan-300 transition-all duration-300 cursor-pointer"
-            >Tailwind CSS</span
-          >
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-yellow-500 transition-all duration-300 cursor-pointer"
-            >JavaScript</span
-          >
-          <span
-            class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm hover:bg-cyan-500/20 hover:text-purple-500 transition-all duration-300 cursor-pointer"
-            >Bootstrap</span
-          >
-        </div>
-      </div>
-
-      <!-- Typewriter Script -->
-      <script>
-        const texts = [
-          "UI/UX Designer",
-          "Front End Developer",
-          "Poster Digital Designer",
-        ];
-        let current = 0;
-        let index = 0;
-        let isDeleting = false;
-        const speed = 150;
-        const pause = 1000;
-
-        const rotator = document.getElementById("text-rotator");
-
-        function type() {
-          const fullText = texts[current];
-          rotator.textContent = isDeleting
-            ? fullText.substring(0, index--)
-            : fullText.substring(0, index++);
-
-          if (!isDeleting && index === fullText.length + 1) {
-            setTimeout(() => (isDeleting = true), pause);
-          } else if (isDeleting && index === -1) {
-            isDeleting = false;
-            current = (current + 1) % texts.length;
-          }
-          setTimeout(type, isDeleting ? speed / 2 : speed);
-        }
-
-        type();
-      </script>
-
+    
+    <div class="jarak">
       <style>
-        @keyframes cursor-blink {
-          0%,
-          50%,
-          100% {
-            border-color: transparent;
-          }
-
-          25%,
-          75% {
-            border-color: #38bdf8;
-          }
-        }
-
-        .animate-cursor {
-          border-right-width: 4px;
-          animation: cursor-blink 1s infinite;
+        .jarak{
+          margin-bottom: 10%;
         }
       </style>
-    </section>
+    </div>
+ <!-- Hero Section -->
+  <section id="home" class="w-full min-h-screen flex flex-col-reverse md:flex-row justify-between px-6 md:px-12 pt-20 md:pt-24">
+
+    <!-- Hero Text -->
+    <div class="flex-1 text-center md:text-left space-y-6 mt-6 md:mt-0">
+      <span class="bg-blue-900/30 text-blue-300 px-4 py-2 rounded-full text-sm tracking-widest border border-blue-500/30 inline-block mb-4">
+        <span class="brand-text" id="text"></span>
+      </span>
+      <script>
+        const topText = "✨ Welcome to My Portfolio ✨";
+        let topIndex = 0;
+        function typeTopLabel() {
+          if (topIndex < topText.length) {
+            document.getElementById("text").innerHTML += topText[topIndex] + "&nbsp;";
+            topIndex++;
+            setTimeout(typeTopLabel, 180);
+          }
+        }
+        typeTopLabel();
+      </script>
+
+      <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 leading-tight drop-shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+        Explore <span class="whitespace-nowrap">My Work</span>
+      </h1>
+
+      <h2 id="text-rotator" class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 border-r-4 border-blue-400 pr-2 animate-cursor"></h2>
+      <script>
+        const rotatorTexts = ["UI/UX Designer", "Front End Developer", "3D Enthusiast"];
+        let currentText = 0, charIndex = 0, deleting = false;
+        const typingSpeed = 120, pauseTime = 1000;
+        const rotator = document.getElementById("text-rotator");
+        function typeRotator() {
+          const fullText = rotatorTexts[currentText];
+          if (deleting) rotator.textContent = fullText.substring(0, charIndex--);
+          else rotator.textContent = fullText.substring(0, charIndex++);
+          if (!deleting && charIndex === fullText.length + 1) setTimeout(() => deleting = true, pauseTime);
+          else if (deleting && charIndex === -1) { deleting = false; currentText = (currentText + 1) % rotatorTexts.length; }
+          setTimeout(typeRotator, deleting ? typingSpeed/2 : typingSpeed);
+        }
+        typeRotator();
+      </script>
+
+      <p class="mt-4 md:mt-6 max-w-3xl text-gray-300 text-base sm:text-lg md:text-xl">
+        I build <span class="text-cyan-400 font-semibold">responsive</span> and visually engaging websites with 
+        <span class="text-orange-400 font-semibold">HTML</span>, 
+        <span class="text-cyan-400 font-semibold">Tailwind CSS</span>, 
+        <span class="text-yellow-400 font-semibold">JavaScript</span>, and 
+        <span class="text-purple-400 font-semibold">Bootstrap</span>.
+      </p>
+
+      <div class="flex flex-wrap justify-center md:justify-start gap-3 mt-6 md:mt-10">
+        <span class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm skill-glow cursor-pointer">HTML</span>
+        <span class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm skill-glow cursor-pointer">Tailwind CSS</span>
+        <span class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm skill-glow cursor-pointer">JavaScript</span>
+        <span class="px-4 py-2 bg-blue-800/40 rounded-full border border-cyan-500/40 text-sm skill-glow cursor-pointer">Bootstrap</span>
+      </div>
+
+      <div class="flex flex-wrap gap-4 mt-6 justify-center md:justify-start">
+        <button class="bg-cyan-400 text-black px-6 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+         <a href="#about">Hire Me</a>
+        </button>
+        <button class="border-2 border-blue-400 px-6 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold text-base sm:text-lg text-blue-400 hover:bg-blue-400 hover:text-black shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+          <a href="#projek">See Projects</a>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3D Model -->
+    <div class="flex-1 flex justify-center floating mt-6 md:mt-0">
+      <model-viewer
+        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+        alt="3D Astronaut"
+        class="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] h-[300px] sm:h-[400px] md:h-[500px] rounded-2xl bg-transparent"
+        auto-rotate camera-controls exposure="1.2" shadow-intensity="1">
+      </model-viewer>
+    </div>
+
+  </section>
+
 
     <!-- ===================== RUNNING TEXT ===================== -->
     <section class="relative overflow-hidden py-8">
@@ -527,7 +507,7 @@
           <button
             class="mt-4 bg-blue-500 hover:bg-blue-600 transition-colors text-white px-6 py-3 rounded-lg font-medium"
           >
-            Get in Touch →
+          <a href="#projek" class="cursor-pointer">Get in Touch →</a>
           </button>
         </div>
       </div>
@@ -863,47 +843,70 @@
 </section>
 
 
-<!-- footer -->
- <footer class="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <!-- Brand -->
-                <div>
-                    <span class="font-bold text-2xl text-blue-500">
-                        Porofolio
-                    </span>
-                    <p class="text-sm mt-2 text-white">Mengembangkan solusi edukasi teknologi bagi generasi digital di Indonesia.”</p>
-                </div>
 
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-white">
-                        <li><a href="#home" class="hover:text-gray-300 transition-colors">Home</a></li>
-                        <li><a href="#about" class="hover:text-gray-300 transition-colors">about</a></li>
-                        <li><a href="#projek" class="hover:text-gray-300 transition-colors">projek</a></li>
-                        <li><a href="#skill" class="hover:text-gray-300 transition-colors">skill</a></li>
-                        <li><a href="#contact" class="hover:text-gray-300 transition-colors">contact</a></li>
 
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Resources</h4>
-                    <ul class="space-y-2 text-sm text-white">
-                        <li><a href="#" class="hover:text-gray-300 transition-colors">Documentation</a></li>
-                        <li><a href="#" class="hover:text-gray-300 transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-gray-300 transition-colors">Support</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-slate-700 pt-8 text-center text-sm text-white">
-                <p id="footer-year">© 2025. All rights reserved. Crafted with passion for digital learning.</p>
-            </div>
-        </div>
-    </footer>
+<footer class="bg-white dark:bg-gray-900">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="md:flex md:justify-between">
+          <div class="mb-6 md:mb-0">
+              <a href="https://flowbite.com/" class="flex items-center">
+                  <img src="Brand Logo.png" class="h-8 me-3" alt="FlowBite Logo" />
+                  <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">My Portofolio</span>
+              </a>
+          </div>
+          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+                  <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                      <li class="mb-4">
+                          <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                      </li>
+                      <li>
+                          <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                      </li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                  <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                      <li class="mb-4">
+                          <a href="https://github.com/lutfi-dika" class="hover:underline ">Github</a>
+                      </li>
+                      <li>
+                          <a href="https://instagram.com/303.andika" class="hover:underline">instagram</a>
+                      </li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">Policies</h2>
+                <ul class="space-y-2 text-gray-500 dark:text-gray-400 font-medium">
+                  <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                  <li><a href="#" class="hover:underline">Terms of Service</a></li>
+                </ul>
+              </div>
+          </div>
+      </div>
+      <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+      <div class="sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025  <a href="https://flowbite.com/" class="hover:underline">© 2025 MyPortfolio.</a>. All Rights Reserved.
+          </span>
+          <div class="flex mt-4 sm:justify-center sm:mt-0">
+              <a href="https://instagram.com/username" target="_blank" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9S160.5 370.8 224.1 370.8 339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-.1-54.6-44.5-99-99.1-99.1H100.6C46 64.2 1.6 108.6 1.5 163.2v195.6c.1 54.6 44.5 99 99.1 99.1h245.8c54.6-.1 99-44.5 99.1-99.1V163.2zM398.8 358c0 30.3-24.6 54.9-54.9 54.9H104.1c-30.3 0-54.9-24.6-54.9-54.9V154c0-30.3 24.6-54.9 54.9-54.9h239.8c30.3 0 54.9 24.6 54.9 54.9v204z"/>
+          </svg>
+          <span class="sr-only">Instagram page</span>
+            </a>
+              <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="sr-only">GitHub account</span>
+              </a>
+          </div>
+      </div>
+    </div>
+</footer>
 
     <!-- JavaScript -->
     <script>
